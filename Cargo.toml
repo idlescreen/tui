@@ -1,7 +1,7 @@
 [package]
 authors = ["idlescreen developers"]
 name = "idle-tui"
-version = "3.2.4"
+version = "3.2.5"
 edition = "2024"
 description = "Optional TUI client for IdleScreen (idle-tui)"
 license = "Apache-2.0"
@@ -16,7 +16,6 @@ path = "src/main.rs"
 [dependencies]
 crossterm = "0.29"
 ratatui = "0.30"
-anyhow = "1"
 # Local path dep: CI checks out idlescreen/runtime here; local may be a symlink to ../runtime
 idle-dbus = { path = "runtime/crates/idle-dbus" }
 idle-runner = { path = "runtime/idle-runner" }

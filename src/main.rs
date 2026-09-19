@@ -10,7 +10,6 @@ mod ui;
 use std::io;
 use std::time::{Duration, Instant};
 
-use anyhow::Result;
 use app::{ActivePane, App};
 use crossterm::{
     event::{self, DisableMouseCapture, EnableMouseCapture, Event, KeyCode, KeyModifiers},
@@ -20,7 +19,7 @@ use crossterm::{
 use ratatui::{Terminal, backend::CrosstermBackend};
 use ui::render_ui;
 
-fn main() -> Result<()> {
+fn main() -> std::io::Result<()> {
     enable_raw_mode()?;
     let mut stdout = io::stdout();
     execute!(stdout, EnterAlternateScreen, EnableMouseCapture)?;
@@ -44,7 +43,10 @@ fn main() -> Result<()> {
     Ok(())
 }
 
-fn run_app(terminal: &mut Terminal<CrosstermBackend<io::Stdout>>, app: &mut App) -> Result<()> {
+fn run_app(
+    terminal: &mut Terminal<CrosstermBackend<io::Stdout>>,
+    app: &mut App,
+) -> std::io::Result<()> {
     let mut last_tick = Instant::now();
     let tick_rate = Duration::from_millis(250);
 
