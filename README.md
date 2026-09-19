@@ -1,6 +1,10 @@
 # tui
 
-[![studio2201 gate](https://github.com/idlescreen/tui/actions/workflows/studio2201.yml/badge.svg)](https://github.com/idlescreen/tui/actions/workflows/studio2201.yml)
+[![snip](https://img.shields.io/github/actions/workflow/status/idlescreen/tui/snip.yml?label=snip&logo=shield)](https://github.com/idlescreen/tui/actions/workflows/snip.yml)
+[![vigil](https://img.shields.io/github/actions/workflow/status/idlescreen/tui/vigil.yml?label=vigil&logo=shield)](https://github.com/idlescreen/tui/actions/workflows/vigil.yml)
+[![aegis](https://img.shields.io/github/actions/workflow/status/idlescreen/tui/aegis.yml?label=aegis&logo=shield)](https://github.com/idlescreen/tui/actions/workflows/aegis.yml)
+[![proven](https://img.shields.io/github/actions/workflow/status/idlescreen/tui/proven.yml?label=proven&logo=shield)](https://github.com/idlescreen/tui/actions/workflows/proven.yml)
+[![boneyard](https://img.shields.io/github/actions/workflow/status/idlescreen/tui/boneyard.yml?label=boneyard&logo=shield)](https://github.com/idlescreen/tui/actions/workflows/boneyard.yml)
 
 Runtime configuration TUI for the IdleScreen daemon — live state, saver
 picker, timeouts, inhibitors. Part of
