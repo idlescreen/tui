@@ -25,9 +25,12 @@ pub fn is_cosmic_applet_installed() -> bool {
 /// against an unconfigured system instead of resolving `idle-cosmic` from
 /// whatever repository happens to be configured for root.
 fn repo_is_configured() -> bool {
-    ["/etc/apt/sources.list.d/idlescreen.list", "/etc/yum.repos.d/idlescreen.repo"]
-        .iter()
-        .any(|p| std::path::Path::new(p).exists())
+    [
+        "/etc/apt/sources.list.d/idlescreen.list",
+        "/etc/yum.repos.d/idlescreen.repo",
+    ]
+    .iter()
+    .any(|p| std::path::Path::new(p).exists())
 }
 
 pub fn install_cosmic_applet() -> Result<(), String> {
