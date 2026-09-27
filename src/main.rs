@@ -7,7 +7,7 @@ mod file_config;
 mod helpers;
 mod ui;
 
-use std::io;
+use std::io::{self, Write};
 use std::time::{Duration, Instant};
 
 use app::{ActivePane, App};
@@ -19,22 +19,57 @@ use crossterm::{
 use ratatui::{Terminal, backend::CrosstermBackend};
 use ui::render_ui;
 
+/// Restores the terminal (raw mode + alternate screen + mouse capture) on every
+/// exit path — including `?` early returns and panics.
+///
+/// This is the same shape as `studio`'s `TerminalGuard`. Before it existed,
+/// `main` called `enable_raw_mode()` and only restored state at the very end,
+/// so a failure in `execute!` or `Terminal::new` left the user's shell in raw
+/// mode, and any panic in `run_app` left raw mode + alt screen + mouse capture
+/// on — the user then had to type `reset` blind.
+struct TerminalGuard;
+
+impl TerminalGuard {
+    fn enter() -> io::Result<Self> {
+        enable_raw_mode()?;
+        let mut out = io::stdout();
+        if let Err(e) = execute!(out, EnterAlternateScreen, EnableMouseCapture) {
+            // Do not leave raw mode on if we could not finish entering.
+            let _ = disable_raw_mode();
+            return Err(e);
+        }
+        let prior = std::panic::take_hook();
+        std::panic::set_hook(Box::new(move |info| {
+            restore(&mut io::stdout());
+            prior(info);
+        }));
+        Ok(Self)
+    }
+}
+
+fn restore(out: &mut io::Stdout) {
+    let _ = execute!(out, LeaveAlternateScreen, DisableMouseCapture);
+    let _ = disable_raw_mode();
+    let _ = out.flush();
+}
+
+impl Drop for TerminalGuard {
+    fn drop(&mut self) {
+        restore(&mut io::stdout());
+    }
+}
+
 fn main() -> std::io::Result<()> {
-    enable_raw_mode()?;
-    let mut stdout = io::stdout();
-    execute!(stdout, EnterAlternateScreen, EnableMouseCapture)?;
-    let backend = CrosstermBackend::new(stdout);
-    let mut terminal = Terminal::new(backend)?;
+    // Held for the whole run: every later `?` return, and any unwind, still
+    // restores the terminal.
+    let _guard = TerminalGuard::enter()?;
+    let mut terminal = Terminal::new(CrosstermBackend::new(io::stdout()))?;
 
     let mut app = App::new();
     let res = run_app(&mut terminal, &mut app);
 
-    disable_raw_mode()?;
-    execute!(
-        terminal.backend_mut(),
-        LeaveAlternateScreen,
-        DisableMouseCapture
-    )?;
+    // The guard restores on drop; show the cursor explicitly since that is
+    // not part of the guard's cleanup contract.
     terminal.show_cursor()?;
 
     if let Err(err) = res {
