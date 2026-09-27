@@ -99,11 +99,13 @@ license-files = []
 
 [bans]
 multiple-versions = "warn"
-# No real cargo dependency uses a wildcard version. The `"*"` entries under
-# `[package.metadata.generate-rpm.*]` in idle-daemon/Cargo.toml are RPM
-# dependency syntax ("any version"), not cargo requirements, and are not
-# covered by this check.
-wildcards = "deny"
+# See runtime/deny.toml for the full explanation: the `"*"` entries that
+# cargo-deny flags here come from `[package.metadata.generate-rpm.*]`
+# tables in sibling repos — RPM-spec dependency declarations, not cargo
+# requirements, and unmatchable by cargo-deny's wildcard check. Workspace
+# dependencies are all version-pinned; the only `"*"` strings in this
+# workspace's Cargo.toml are path-deps (no version field at all).
+wildcards = "allow"
 highlight = "all"
 deny = []
 skip = []
