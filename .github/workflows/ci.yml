@@ -29,6 +29,18 @@ jobs:
           libdbus-1-dev pkg-config libssl-dev \
           libfontconfig1-dev libfreetype6-dev
 
+    - name: file length cap (16-256 lines per page)
+      # Org-wide rule from .github/RULES.md. Excludes runtime/.
+      run: |
+        over=$(find . -name '*.rs' -not -path './target/*' -not -path './runtime/*' \
+            | xargs wc -l \
+            | awk '$1 > 256 || $1 < 16')
+        if [ -n "$over" ]; then
+          echo "Files outside 16-256 line range:"
+          echo "$over"
+          exit 1
+        fi
+
     - name: cargo build
       run: cargo build --workspace --all-targets
 
