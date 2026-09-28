@@ -893,7 +893,7 @@ dependencies = [
 
 [[package]]
 name = "idle-tui"
-version = "3.2.6"
+version = "3.2.7"
 dependencies = [
  "crossterm",
  "idle-dbus",
@@ -2436,6 +2436,7 @@ version = "0.4.0"
 dependencies = [
  "idle-log",
  "libc",
+ "parking_lot",
  "wayland-client",
  "wayland-protocols",
  "wayland-protocols-wlr",
