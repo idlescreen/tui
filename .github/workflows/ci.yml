@@ -12,6 +12,11 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # This job also runs `cargo test --workspace --all-targets`. A
+    # deadlocked test must fail the build, not burn a runner for the
+    # 6-hour default. See runtime's
+    # `apply_commands_drains_channel_until_empty` incident.
+    timeout-minutes: 25
     steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
 
