@@ -889,6 +889,7 @@ dependencies = [
  "libc",
  "tokio",
  "wgpu",
+ "zbus",
 ]
 
 [[package]]
