@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 IdleScreen
 
+mod actions;
 mod app;
 pub mod cosmic;
 mod file_config;
-mod actions;
 mod ui;
 
 use std::io::{self, Write};
