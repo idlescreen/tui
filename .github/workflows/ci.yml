@@ -49,6 +49,8 @@ jobs:
         cargo binstall -y cargo-audit
         cargo audit
 
+    - name: Validate page-score.json
+      run: qa/page_score_check.sh
     - name: cargo fmt check
       run: cargo fmt --all -- --check
   deny:
