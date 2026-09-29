@@ -1,8 +1,15 @@
 {
  "repo": "tui",
- "rev": "311d600",
- "dirty": false,
+ "rev": "add7c05",
+ "dirty": true,
  "pages": [
+  {
+   "path": "./src/actions.rs",
+   "lines": 153,
+   "bin_bytes": null,
+   "heat_pct": null,
+   "reach": 0
+  },
   {
    "path": "./src/app.rs",
    "lines": 221,
@@ -34,13 +41,6 @@
   {
    "path": "./src/file_config_tests.rs",
    "lines": 129,
-   "bin_bytes": null,
-   "heat_pct": null,
-   "reach": 0
-  },
-  {
-   "path": "./src/helpers.rs",
-   "lines": 153,
    "bin_bytes": null,
    "heat_pct": null,
    "reach": 0

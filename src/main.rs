@@ -4,7 +4,7 @@
 mod app;
 pub mod cosmic;
 mod file_config;
-mod helpers;
+mod actions;
 mod ui;
 
 use std::io::{self, Write};
