@@ -1,7 +1,7 @@
 {
  "repo": "tui",
- "rev": "63e9d9b",
- "dirty": true,
+ "rev": "311d600",
+ "dirty": false,
  "pages": [
   {
    "path": "./src/app.rs",
