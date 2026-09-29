@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-// perf: T3 · metric: touches the filesystem; dominated by syscall latency, not by this page's logic · check: review
 
 //! Offline config access: when the daemon is unreachable the TUI reads and
 //! writes `~/.config/idle/config.yaml` directly. Writes are read-modify-write
