@@ -178,14 +178,16 @@ pub fn merge_saver_param(existing: &str, key: &str, value: &str) -> String {
                 None => None,
             }
         });
-        if !written && resolved.as_ref().is_some_and(|(_, r)| r.as_str() == key) {
-            // Emit the section-local key so `[saver.hearth] size` stays
-            // `size` — writing `hearth.size` here would parse as
-            // `hearth.hearth.size`.
-            let inner = resolved.unwrap().0;
-            body.push_str(&format!("{inner}: {value}\n"));
-            written = true;
-            continue;
+        match &resolved {
+            Some((inner, r)) if !written && r == key => {
+                // Emit the section-local key so `[saver.hearth] size` stays
+                // `size` — writing `hearth.size` here would parse as
+                // `hearth.hearth.size`.
+                body.push_str(&format!("{inner}: {value}\n"));
+                written = true;
+                continue;
+            }
+            _ => {}
         }
         body.push_str(line);
         body.push('\n');
