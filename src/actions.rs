@@ -121,7 +121,7 @@ impl App {
     pub fn preview_saver(&mut self) {
         let saver = if self.selected_saver_idx == 0 {
             if self.screensavers.is_empty() {
-                "beams".to_string()
+                "ascii".to_string()
             } else {
                 self.screensavers[0].clone()
             }
