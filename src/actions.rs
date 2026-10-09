@@ -61,7 +61,7 @@ impl App {
             self.idle_timeout_mins = f.idle_timeout_mins;
             self.show_fps_overlay = f.show_fps_overlay;
             self.render_scale = f.render_scale.unwrap_or(1.0);
-            self.active_saver = f.active_saver.unwrap_or_else(|| "Random".to_string());
+            self.active_saver = f.active_saver.unwrap_or_else(|| "ascii".to_string());
         }
 
         self.refresh_sys_info();

@@ -894,7 +894,7 @@ dependencies = [
 
 [[package]]
 name = "idle-tui"
-version = "3.2.10"
+version = "3.2.11"
 dependencies = [
  "crossterm",
  "idle-dbus",

@@ -48,7 +48,7 @@ impl App {
             idle_timeout_mins: 5,
             render_scale: 1.0,
             show_fps_overlay: false,
-            active_saver: "Random".to_string(),
+            active_saver: "ascii".to_string(),
             on_battery: false,
             screensavers: Vec::new(),
             selected_saver_idx: 0,
