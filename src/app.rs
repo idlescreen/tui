@@ -45,7 +45,7 @@ impl App {
             client: None,
             daemon_running: false,
             idle_enabled: true,
-            idle_timeout_mins: 5,
+            idle_timeout_mins: 2,
             render_scale: 1.0,
             show_fps_overlay: false,
             active_saver: "ascii".to_string(),

@@ -53,7 +53,7 @@ pub fn config_path() -> Option<PathBuf> {
 
 pub fn load() -> FileSettings {
     let mut s = FileSettings {
-        idle_timeout_mins: 5,
+        idle_timeout_mins: 2,
         idle_enabled: true,
         ..Default::default()
     };
